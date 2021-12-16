@@ -51,7 +51,7 @@ class BadgeForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="mb-3">
         <h1>New Attendant</h1>
 
         <form onSubmit={this.handleSubmit}>
