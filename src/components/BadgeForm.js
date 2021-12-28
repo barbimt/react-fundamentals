@@ -21,40 +21,40 @@ class BadgeForm extends React.Component {
     console.log("Button was clicked");
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form was submitted");
-    console.log(this.props.formValues);
-    let datoFaltante = [];
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form was submitted");
+  //   console.log(this.props.formValues);
+  //   let datoFaltante = [];
 
-    for (const propiedad in this.props.formValues) {
-      if (this.props.formValues.hasOwnProperty(propiedad)) {
-        const valor = this.props.formValues[propiedad];
-        if (valor === "") {
-          datoFaltante.push(propiedad);
-        }
-      }
-    }
+  //   for (const propiedad in this.props.formValues) {
+  //     if (this.props.formValues.hasOwnProperty(propiedad)) {
+  //       const valor = this.props.formValues[propiedad];
+  //       if (valor === "") {
+  //         datoFaltante.push(propiedad);
+  //       }
+  //     }
+  //   }
 
-    if (
-      this.props.formValues.firstName === "" ||
-      this.props.formValues.lastName === "" ||
-      this.props.formValues.email === "" ||
-      this.props.formValues.jobTitle === "" ||
-      this.props.formValues.twitter === ""
-    ) {
-      console.log("faltan datos");
-      let camposFaltantes = datoFaltante.join(",");
-      this.alertaFaltanDatos(camposFaltantes);
-    }
-  };
+  //   if (
+  //     this.props.formValues.firstName === "" ||
+  //     this.props.formValues.lastName === "" ||
+  //     this.props.formValues.email === "" ||
+  //     this.props.formValues.jobTitle === "" ||
+  //     this.props.formValues.twitter === ""
+  //   ) {
+  //     console.log("faltan datos");
+  //     let camposFaltantes = datoFaltante.join(",");
+  //     this.alertaFaltanDatos(camposFaltantes);
+  //   }
+  // };
 
   render() {
     return (
       <div className="mb-3">
         <h1>New Attendant</h1>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.onSubmit}>
           <div className="form-group">
             <label>First Name</label>
             <input
