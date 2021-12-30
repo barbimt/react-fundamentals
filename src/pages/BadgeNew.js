@@ -1,15 +1,19 @@
 import React from "react";
 
 import "./styles/BadgeNew.css";
-
+import { Navigate } from "react-router-dom";
 import header from "../images/platziconf-logo.svg";
 import Badge from "../components/Badge";
 import BadgeForm from "../components/BadgeForm";
 import api from "../api";
 import Swal from "sweetalert2/dist/sweetalert2";
+import PageLoading from "../components/PageLoading";
 
 class BadgeNew extends React.Component {
   state = {
+    submit: false,
+    loading: false,
+    error: null,
     form: {
       firstName: "",
       lastName: "",
@@ -18,7 +22,7 @@ class BadgeNew extends React.Component {
       twitter: "",
     },
   };
-  // state = {};
+
   alertaFaltanDatos(faltantes) {
     Swal.fire({
       title: "Alto ahi!",
@@ -28,8 +32,6 @@ class BadgeNew extends React.Component {
   }
 
   handleChange = (e) => {
-    // const nextForm = this.state.form;
-    // nextForm[e.target.name] = e.target.value;
     this.setState({
       form: { ...this.state.form, [e.target.name]: e.target.value },
     });
@@ -38,12 +40,14 @@ class BadgeNew extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     this.setState({ loading: true, error: null });
+
     try {
       await api.badges.create(this.state.form);
-      this.setState({ loading: false });
+      this.setState({ loading: false, submit: true });
     } catch (error) {
       this.setState({ loading: false, error: error });
     }
+
     let datoFaltante = [];
 
     for (const propiedad in this.state.form) {
@@ -68,7 +72,16 @@ class BadgeNew extends React.Component {
       this.alertaFaltanDatos(camposFaltantes);
     }
   };
+
   render() {
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
+
+    if (this.state.submit) {
+      return <Navigate to="/badges" />;
+    }
+
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">
@@ -96,6 +109,7 @@ class BadgeNew extends React.Component {
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
                 formValues={this.state.form}
+                error={this.state.error}
               />
             </div>
           </div>
@@ -104,4 +118,5 @@ class BadgeNew extends React.Component {
     );
   }
 }
+
 export default BadgeNew;

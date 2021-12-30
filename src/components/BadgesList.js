@@ -35,7 +35,6 @@ class BadgesListItem extends React.Component {
 class BadgesList extends React.Component {
   render() {
     if (this.props.badges.length === 0) {
-      //si no hubo ningun dato, regresamos
       return (
         <div className="container ">
           <h3>No badges were found</h3>
@@ -48,7 +47,7 @@ class BadgesList extends React.Component {
     return (
       <div className="BadgesList">
         <ul className="list-unstyled">
-          {this.props.badges.map((badge) => {
+          {this.props.badges.reverse().map((badge) => {
             return (
               <li key={badge.id}>
                 <BadgesListItem badge={badge} />
