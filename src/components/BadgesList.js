@@ -50,7 +50,13 @@ class BadgesList extends React.Component {
           {this.props.badges.reverse().map((badge) => {
             return (
               <li key={badge.id}>
-                <BadgesListItem badge={badge} />
+                <Link
+                  style={{ textDecoration: "none" }}
+                  className="text-muted"
+                  to={`/badges/${badge.id}/edit`}
+                >
+                  <BadgesListItem badge={badge} />
+                </Link>
               </li>
             );
           })}
