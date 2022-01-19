@@ -6,6 +6,7 @@ import BadgeEdit from "../pages/BadgeEdit";
 import Badges from "../pages/Badges";
 import BadgeHome from "../pages/BadgeHome";
 import NotFound from "../pages/NotFound";
+import BadgeDetails from "../pages/BadgeDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/badges" element={<Badges />} />
           <Route path="/badges/new" element={<BadgeNew />} />
           <Route path="/badges/:badgeId/edit" element={<BadgeEdit />} />
+          <Route path="/badges/:badgeId" element={<BadgeDetails />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
